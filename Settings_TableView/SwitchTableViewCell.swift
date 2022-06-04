@@ -10,6 +10,7 @@ import UIKit
 class SwitchTableViewCell: UITableViewCell {
     static let identifire = "SwitchTableViewCell"
     
+    //MARK: - UI's element
     private let iconContainer: UIView = {
         let container = UIView()
         container.clipsToBounds = true
@@ -44,6 +45,7 @@ class SwitchTableViewCell: UITableViewCell {
         return switcher
     }()
     
+    //MARK: Reinit content's
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -59,6 +61,7 @@ class SwitchTableViewCell: UITableViewCell {
         fatalError()
     }
     
+    //MARK: - Layout's UI's
     override func layoutSubviews() {
         super.layoutSubviews()
         let containerSize: CGFloat = contentView.frame.height - 10
@@ -75,6 +78,7 @@ class SwitchTableViewCell: UITableViewCell {
         switcher.frame = CGRect(x: contentView.frame.size.width - switcher.frame.size.width - 20, y: (contentView.frame.size.height - switcher.frame.size.height) / 2, width: switcher.frame.size.width, height: switcher.frame.size.height)
     }
     
+    //MARK: Prepare for reuse UI's
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -84,6 +88,7 @@ class SwitchTableViewCell: UITableViewCell {
         switcher.isOn = false
     }
     
+    //MARK: - Configure UI's
     public func configure(with model: SettingSwitchOption) {
         itemLabel.text = model.title
         iconImageView.image = model.iconImage

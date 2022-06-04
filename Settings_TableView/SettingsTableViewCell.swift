@@ -10,6 +10,7 @@ import UIKit
 class SettingsTableViewCell: UITableViewCell {
     static let identifire = "SettingsTableViewCell"
     
+    //MARK: - UI's element
     private let iconContainer: UIView = {
         let container = UIView()
         container.clipsToBounds = true
@@ -36,6 +37,7 @@ class SettingsTableViewCell: UITableViewCell {
         return label
     }()
     
+    //MARK: Reinit content's
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -50,6 +52,7 @@ class SettingsTableViewCell: UITableViewCell {
         fatalError()
     }
     
+    //MARK: - Layout's UI's
     override func layoutSubviews() {
         super.layoutSubviews()
         let containerSize: CGFloat = contentView.frame.height - 10
@@ -63,6 +66,7 @@ class SettingsTableViewCell: UITableViewCell {
         itemLabel.frame = CGRect(x: 25 + iconContainer.frame.size.width, y: 0, width: contentView.frame.width - 20 - iconContainer.frame.size.width, height: contentView.frame.size.height)
     }
     
+    //MARK: Prepare for reuse UI's
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -71,6 +75,7 @@ class SettingsTableViewCell: UITableViewCell {
         iconContainer.backgroundColor = nil
     }
     
+    //MARK: - Configure UI's
     public func configure(with model: SettingsOption) {
         itemLabel.text = model.title
         iconImageView.image = model.iconImage

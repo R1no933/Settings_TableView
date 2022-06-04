@@ -4,6 +4,8 @@
 //
 //  Created by Dmitriy Baskakov on 04.06.2022.
 //
+
+//MARK: - Add Struct's and enum for cell's
 struct SettingsOption {
     let title: String
     let iconImage: UIImage?
@@ -35,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var models = [Section]()
     
-    //Создаем таблицу
+    //MARK: - Create table
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifire)
@@ -44,10 +46,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return table
     }()
     
+    //MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Прописываем делегата и дату и задаем заголовок
+        
         title = "Настройки"
         configure()
         tableView.delegate = self
@@ -57,6 +60,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         view.addSubview(tableView)
     }
     
+    //MARK: - Configure cell's
     func configure() {
         models.append(Section(title: "Network Settings", option: [
             .switchCell(model: SettingSwitchOption(title: "Авиарежим", iconImage: UIImage(systemName: "airplane"), backgroundColor: UIColor.systemOrange, handler: {
@@ -138,6 +142,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    //MARK: - Count of section's and cell's
     func numberOfSections(in tableView: UITableView) -> Int {
         return models.count
     }
@@ -146,6 +151,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return models[section].option.count
     }
     
+    //MARK: - Configure cell by type
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = models[indexPath.section].option[indexPath.row]
         
@@ -167,6 +173,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    //MARK: - Turn off cell selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
