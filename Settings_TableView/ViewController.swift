@@ -13,9 +13,18 @@ struct SettingsOption {
     let handler: (() -> Void)
 }
 
+struct NetworkOption {
+    let title: String
+    let detail: String
+    let iconImage: UIImage?
+    let backgroundColor: UIColor
+    let handler: (() -> Void)
+}
+
 enum SettingsOptionType {
     case staticCell(model: SettingsOption)
     case switchCell(model: SettingSwitchOption)
+    case networkCell(model: NetworkOption)
 }
 
 struct SettingSwitchOption {
@@ -42,6 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifire)
         table.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifire)
+        table.register(NetworkTableViewCell.self, forCellReuseIdentifier: NetworkTableViewCell.identifire)
         
         return table
     }()
@@ -68,10 +78,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("Нажат Авиарежим")
                 
             }, isOn: false)),
-            .staticCell(model: SettingsOption(title: "Wi-Fi", iconImage: UIImage(systemName: "wifi"), backgroundColor: UIColor.systemBlue, handler: {
+            .networkCell(model: NetworkOption(title: "Wi-Fi", detail: "Sweet_Home", iconImage: UIImage(systemName: "wifi"), backgroundColor: UIColor.systemBlue, handler: {
                 print("Нажат Wi-Fi")
             })),
-            .staticCell(model: SettingsOption(title: "Bluetooth", iconImage: UIImage(systemName: "bolt.horizontal"), backgroundColor: UIColor.systemBlue, handler: {
+            .networkCell(model: NetworkOption(title: "Bluetooth", detail: "Не подключен", iconImage: UIImage(systemName: "bolt.horizontal"), backgroundColor: UIColor.systemBlue, handler: {
                 print("Нажат Bluetooth")
             })),
             .staticCell(model: SettingsOption(title: "Сотовая связь", iconImage: UIImage(systemName: "antenna.radiowaves.left.and.right"), backgroundColor: UIColor.systemGreen, handler: {
@@ -170,6 +180,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             cell.configure(with: model)
             return cell
+        case .networkCell(let model):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NetworkTableViewCell.identifire, for: indexPath) as?
+                    NetworkTableViewCell else {
+                    return UITableViewCell()
+            }
+            cell.configure(with: model)
+            return cell
         }
     }
     
@@ -182,6 +199,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         case .staticCell(let model):
             model.handler()
         case .switchCell(let model):
+            model.handler()
+        case .networkCell(let model):
             model.handler()
         }
     }
