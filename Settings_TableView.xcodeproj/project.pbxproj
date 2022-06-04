@@ -11,7 +11,7 @@
 		B70A395E284B76F700E0F56B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70A395D284B76F700E0F56B /* ViewController.swift */; };
 		B70A3963284B76F900E0F56B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B70A3962284B76F900E0F56B /* Assets.xcassets */; };
 		B70A3966284B76F900E0F56B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B70A3964284B76F900E0F56B /* LaunchScreen.storyboard */; };
-		B70A396E284B863C00E0F56B /* SettingsOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70A396D284B863C00E0F56B /* SettingsOption.swift */; };
+		B70A3970284B8A1B00E0F56B /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70A396F284B8A1B00E0F56B /* SettingsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +21,7 @@
 		B70A3962284B76F900E0F56B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B70A3965284B76F900E0F56B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B70A3967284B76F900E0F56B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B70A396D284B863C00E0F56B /* SettingsOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOption.swift; sourceTree = "<group>"; };
+		B70A396F284B8A1B00E0F56B /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +56,10 @@
 			children = (
 				B70A3959284B76F700E0F56B /* AppDelegate.swift */,
 				B70A395D284B76F700E0F56B /* ViewController.swift */,
-				B70A396D284B863C00E0F56B /* SettingsOption.swift */,
 				B70A3962284B76F900E0F56B /* Assets.xcassets */,
 				B70A3964284B76F900E0F56B /* LaunchScreen.storyboard */,
 				B70A3967284B76F900E0F56B /* Info.plist */,
+				B70A396F284B8A1B00E0F56B /* SettingsTableViewCell.swift */,
 			);
 			path = Settings_TableView;
 			sourceTree = "<group>";
@@ -136,7 +136,7 @@
 			files = (
 				B70A395E284B76F700E0F56B /* ViewController.swift in Sources */,
 				B70A395A284B76F700E0F56B /* AppDelegate.swift in Sources */,
-				B70A396E284B863C00E0F56B /* SettingsOption.swift in Sources */,
+				B70A3970284B8A1B00E0F56B /* SettingsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

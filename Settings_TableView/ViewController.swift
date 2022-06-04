@@ -4,6 +4,17 @@
 //
 //  Created by Dmitriy Baskakov on 04.06.2022.
 //
+struct SettingsOption {
+    let title: String
+    let iconImage: UIImage?
+    let backgroundColor: UIColor
+    let handler: (() -> Void)
+}
+
+struct Section {
+    let title: String
+    let option: [SettingsOption]
+}
 
 import UIKit
 
@@ -14,7 +25,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Создаем таблицу
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifire)
         
         return table
     }()
@@ -34,7 +45,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func configure() {
         self.models = Array(0...20).compactMap({
-            SettingsOption(title: "\($0)", iconImage: UIImage(systemName: "plane"), backgroundColor: .systemOrange) {
+            SettingsOption(title: "\($0)", iconImage: UIImage(systemName: "house"), backgroundColor: .systemOrange) {
                 
             }
         })
@@ -46,9 +57,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let modelLabel = models[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifire, for: indexPath) as? SettingsTableViewCell else {
+            return UITableViewCell()
+        }
         
-        cell.textLabel?.text = modelLabel.title
+        cell.configure(with: modelLabel)
         
         return cell
     }
