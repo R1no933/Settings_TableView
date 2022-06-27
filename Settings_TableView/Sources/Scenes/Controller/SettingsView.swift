@@ -23,6 +23,7 @@ class SettingsView: UIView, UITableViewDelegate, UITableViewDataSource {
         table.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifire)
         table.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifire)
         table.register(NetworkTableViewCell.self, forCellReuseIdentifier: NetworkTableViewCell.identifire)
+        table.translatesAutoresizingMaskIntoConstraints = false
         
         return table
     }()
@@ -32,12 +33,26 @@ class SettingsView: UIView, UITableViewDelegate, UITableViewDataSource {
     //MARK: - Init's
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        setupHierarchy()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupHierarchy()
+        setupLayout()
     }
     
+    func setupHierarchy() {
+        addSubview(tableView)
+    }
+    
+    func setupLayout() {
+        tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
     //MARK: - Count of section's and cell's
     func numberOfSections(in tableView: UITableView) -> Int {
         return models.count
