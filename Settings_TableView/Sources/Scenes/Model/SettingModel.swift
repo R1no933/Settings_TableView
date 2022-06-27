@@ -1,77 +1,19 @@
 //
-//  ViewController.swift
+//  SettingModel.swift
 //  Settings_TableView
 //
-//  Created by Dmitriy Baskakov on 04.06.2022.
+//  Created by Dmitriy Baskakov on 27.06.2022.
 //
 
-//MARK: - Add Struct's and enum for cell's
-struct SettingsOption {
-    let title: String
-    let iconImage: UIImage?
-    let backgroundColor: UIColor
-    let handler: (() -> Void)
-}
-
-struct NetworkOption {
-    let title: String
-    let detail: String
-    let iconImage: UIImage?
-    let backgroundColor: UIColor
-    let handler: (() -> Void)
-}
-
-enum SettingsOptionType {
-    case staticCell(model: SettingsOption)
-    case switchCell(model: SettingSwitchOption)
-    case networkCell(model: NetworkOption)
-}
-
-struct SettingSwitchOption {
-    let title: String
-    let iconImage: UIImage?
-    let backgroundColor: UIColor
-    let handler: (() -> Void)
-    var isOn: Bool
-}
-
-struct Section {
-    let title: String
-    let option: [SettingsOptionType]
-}
-
+import Foundation
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SettingModel {
     
-    var models = [Section]()
-    
-    //MARK: - Create table
-    private let tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        table.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifire)
-        table.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifire)
-        table.register(NetworkTableViewCell.self, forCellReuseIdentifier: NetworkTableViewCell.identifire)
+    func configureModel() -> [Section] {
         
-        return table
-    }()
-    
-    //MARK: - View did load
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        var models = [Section]()
         
-        
-        title = "Настройки"
-        configure()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.frame = view.bounds
-        
-        view.addSubview(tableView)
-    }
-    
-    //MARK: - Configure cell's
-    func configure() {
         models.append(Section(title: "Network Settings", option: [
             .switchCell(model: SettingSwitchOption(title: "Авиарежим", iconImage: UIImage(systemName: "airplane"), backgroundColor: UIColor.systemOrange, handler: {
                 
@@ -150,60 +92,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         ]))
         
+      return models
     }
-    
-    //MARK: - Count of section's and cell's
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return models.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return models[section].option.count
-    }
-    
-    //MARK: - Configure cell by type
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = models[indexPath.section].option[indexPath.row]
-        
-        switch model.self {
-        case .staticCell(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifire, for: indexPath) as?
-                    SettingsTableViewCell else {
-                    return UITableViewCell()
-            }
-            cell.configure(with: model)
-            return cell
-        case .switchCell(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifire, for: indexPath) as?
-                    SwitchTableViewCell else {
-                    return UITableViewCell()
-            }
-            cell.configure(with: model)
-            return cell
-        case .networkCell(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: NetworkTableViewCell.identifire, for: indexPath) as?
-                    NetworkTableViewCell else {
-                    return UITableViewCell()
-            }
-            cell.configure(with: model)
-            return cell
-        }
-    }
-    
-    //MARK: - Turn off cell selection
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let type = models[indexPath.section].option[indexPath.row]
-        switch type.self {
-        case .staticCell(let model):
-            model.handler()
-        case .switchCell(let model):
-            model.handler()
-        case .networkCell(let model):
-            model.handler()
-        }
-    }
-
 }
 

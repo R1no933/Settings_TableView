@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let navigationCaontroller = UINavigationController(rootViewController: ViewController())
+        let navigationCaontroller = UINavigationController(rootViewController: SettingsViewController())
         navigationCaontroller.navigationBar.prefersLargeTitles = true
         
         window = UIWindow(frame: UIScreen.main.bounds)
