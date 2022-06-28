@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsView: UIView, UITableViewDelegate, UITableViewDataSource {
+class SettingsView: UIView {
     //MARK: Confogure view
     
     func configureView(with models: [Section]) {
@@ -45,14 +45,20 @@ class SettingsView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func setupHierarchy() {
         addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func setupLayout() {
         tableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
+    
+}
+
+extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     //MARK: - Count of section's and cell's
     func numberOfSections(in tableView: UITableView) -> Int {
         return models.count
